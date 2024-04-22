@@ -1,7 +1,7 @@
-'use client';
-import { FileError, FileWithPath } from '@/types/react-dropzone';
-import React, { useCallback } from 'react';
-import { useDropzone } from 'react-dropzone';
+"use client";
+import { FileError, FileWithPath } from "@/types/react-dropzone";
+import React, { useCallback } from "react";
+import { useDropzone } from "react-dropzone";
 export default function DropZone() {
   const onDrop = useCallback((acceptedFiles: FileWithPath[]) => {
     // Do something with the files
@@ -15,8 +15,8 @@ export default function DropZone() {
   } = useDropzone({
     onDrop,
     accept: {
-      'image/png': ['.png', '.jpg', '.jpeg'],
-      'image/heic': ['.heic'],
+      "image/png": [".png", ".jpg", ".jpeg"],
+      "image/heic": [".heic"],
     },
   });
 
