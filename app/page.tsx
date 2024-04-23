@@ -1,17 +1,12 @@
 import Image from "next/image";
-import tree from "@/public/trueBlueTree.webp";
 import Header from "@/components/header/header";
+import Main from "@/components/main/main";
 
 export default function Home() {
   return (
     <div className="h-full flex flex-col">
       <Header />
-      <div className="h-full flex items-center justify-center gap-4 ">
-        <h1 className="text-2xl">Trueblue-tree</h1>
-        <div className="">
-          <Image src={tree} alt="trueBlueTree" width={32} height={32} />
-        </div>
-      </div>
+      <Main />
     </div>
   );
 }

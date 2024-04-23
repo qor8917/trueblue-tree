@@ -16,7 +16,7 @@ export async function GET(request: NextRequest) {
     if (!code) {
       const error = searchParams.get("error");
       // return NextResponse.json({ error: error || "Unknown error" });
-      return NextResponse.redirect(new URL("/login", request.nextUrl));
+      return NextResponse.redirect(new URL("/", request.nextUrl));
     }
 
     const authorizationHeader = `Basic ${Buffer.from(
@@ -57,6 +57,6 @@ export async function GET(request: NextRequest) {
 
     return NextResponse.redirect(new URL("/", request.nextUrl));
   } catch (error) {
-    return NextResponse.redirect(new URL("/login", request.nextUrl));
+    return NextResponse.redirect(new URL("/", request.nextUrl));
   }
 }
