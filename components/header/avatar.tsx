@@ -38,10 +38,7 @@ export function AvatarIcon() {
             {userInfo ? (
               <AvatarImage src={userInfo.picture} alt="profile" />
             ) : (
-              <AvatarImage
-                src={"http://localhost:3000/key.webp"}
-                alt="profile"
-              />
+              <AvatarImage src={"/key.webp"} alt="profile" />
             )}
           </Avatar>
         </DropdownMenuTrigger>
@@ -53,6 +50,7 @@ export function AvatarIcon() {
               className="cursor-pointer"
               onClick={() => {
                 route.push("/api/auth/signout");
+                console.log("bb");
                 setUserInfo(null);
               }}
             >
@@ -62,7 +60,9 @@ export function AvatarIcon() {
           ) : (
             <DropdownMenuItem
               className="cursor-pointer"
-              onClick={() => route.push("/api/auth/google-sign-in")}
+              onClick={async () => {
+                await fetch("/api/auth/google-sign-in");
+              }}
             >
               <LogOut className="mr-2 h-4 w-4" />
               <span>Log In</span>
