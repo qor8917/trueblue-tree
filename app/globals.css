@@ -4,12 +4,8 @@
 
 /* 기본설정 */
 @layer base {
-  html,
-  body {
-    @apply h-full;
-  }
   :root {
-    @apply px-2 container box-border;
+    @apply h-full px-2 container box-border;
   }
 
   .dark {

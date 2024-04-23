@@ -12,6 +12,7 @@
     "coverage": "jest --coverage"
   },
   "dependencies": {
+    "@aws-sdk/cloudfront-signer": "^3.541.0",
     "@radix-ui/react-avatar": "^1.0.4",
     "@radix-ui/react-dropdown-menu": "^2.0.6",
     "amazon-cognito-identity-js": "^6.3.12",
