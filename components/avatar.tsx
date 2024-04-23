@@ -20,16 +20,12 @@ import {
 } from "@/actions/auth/action";
 import { useEffect, useState } from "react";
 
-export function AvatarIcon() {
+export function AvatarIcon({ userInfo }: { userInfo: any }) {
   const route = useRouter();
-  const [userInfo, setUserInfo] = useState<any>(null);
+  const [user, setUserInfo] = useState<any>(null);
   useEffect(() => {
-    const getUser = async () => {
-      const userInfo = await getUserInfo();
-      setUserInfo(userInfo);
-    };
-    getUser();
-  }, []);
+    setUserInfo(userInfo);
+  }, [userInfo]);
   return (
     <div>
       <DropdownMenu>
@@ -39,8 +35,11 @@ export function AvatarIcon() {
               route.push("/api/auth/google-sign-in");
             }}
           >
-            {userInfo ? (
-              <AvatarImage src={userInfo.picture} alt="profile" />
+            {user ? (
+              <>
+                <AvatarImage src={user.picture} alt="profile" />
+                <AvatarFallback>D</AvatarFallback>
+              </>
             ) : (
               <AvatarImage src={"/key.webp"} alt="profile" />
             )}
@@ -49,12 +48,18 @@ export function AvatarIcon() {
         <DropdownMenuContent align="end">
           <DropdownMenuLabel>My Account</DropdownMenuLabel>
           <DropdownMenuSeparator />
-          {userInfo ? (
+          {user ? (
             <DropdownMenuItem
               className="cursor-pointer"
-              onClick={() => {
-                redirectSignOut();
-                setUserInfo(null);
+              onClick={async () => {
+                const { status } = (await redirectSignOut()) as {
+                  status: boolean;
+                  response: object;
+                };
+                if (status) {
+                  setUserInfo(null);
+                  route.refresh();
+                }
               }}
             >
               <LogOut className="mr-2 h-4 w-4 " />

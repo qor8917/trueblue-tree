@@ -3,7 +3,7 @@ import tree from "@/public/trueBlueTree.webp";
 
 export default function Main() {
   return (
-    <main className="h-full flex items-center justify-center gap-4 ">
+    <main className="h-full flex items-center justify-center">
       <h1 className="text-2xl">Trueblue-tree</h1>
       <div className="">
         <Image src={tree} alt="trueBlueTree" width={32} height={32} />

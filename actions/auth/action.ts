@@ -16,14 +16,14 @@ export const getUserInfo = async () => {
   const tokenWithHeader = `Bearer ${accessToken.value}`;
 
   // Get UserInfo
-  const res2 = await fetch(`${NEXT_PUBLIC_COGNITO_DOMAIN}/oauth2/userInfo`, {
+  const res = await fetch(`${NEXT_PUBLIC_COGNITO_DOMAIN}/oauth2/userInfo`, {
     method: "GET",
     headers: {
       "Content-Type": "application/x-amz-json-1.1",
       Authorization: tokenWithHeader,
     },
   });
-  const userInfo = await res2.json();
+  const userInfo = await res.json();
 
   return userInfo;
 };
@@ -60,7 +60,6 @@ export const redirectSignOut = async () => {
   const idTokenExists = cookieStore.has("id_token");
   const accessTokenExists = cookieStore.has("access_token");
   const refreshTokenExists = cookieStore.has("refresh_token");
-  const userInfoExists = cookieStore.has("user_info");
 
   if (!refreshTokenExists) {
     redirect("/");
@@ -86,8 +85,11 @@ export const redirectSignOut = async () => {
     const data = await response.json();
 
     return {
-      error: data.error,
-      error_description: data.error_description,
+      status: 500,
+      response: {
+        error: data.error,
+        error_description: data.error_description,
+      },
     };
   }
 
@@ -104,10 +106,9 @@ export const redirectSignOut = async () => {
       cookieStore.delete("refresh_token");
     }
 
-    if (userInfoExists) {
-      cookieStore.delete("user_info");
-    }
-
-    redirect("/");
+    return {
+      status: true,
+      response: {},
+    };
   }
 };
