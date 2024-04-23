@@ -6,7 +6,7 @@ export default function Home() {
   return (
     <div className="h-full flex flex-col">
       <Header />
-      <div className="h-full flex items-center justify-center gap-4">
+      <div className="h-full flex items-center justify-center gap-4 ">
         <h1 className="text-2xl">Trueblue-tree</h1>
         <div className="">
           <Image src={tree} alt="trueBlueTree" width={32} height={32} />

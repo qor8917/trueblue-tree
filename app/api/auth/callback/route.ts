@@ -41,18 +41,6 @@ export async function GET(request: NextRequest) {
     });
 
     const data = await res.json();
-    console.log(data.access_token);
-    const tokenWithHeader = `Bearer ${data.access_token}`;
-    // Get UserInfo
-    const res2 = await fetch(`${NEXT_PUBLIC_COGNITO_DOMAIN}/oauth2/userInfo`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/x-amz-json-1.1",
-        Authorization: tokenWithHeader,
-      },
-    });
-    const userInfo = await res2.json();
-    console.log(userInfo);
 
     if (!res.ok) {
       return NextResponse.json({
@@ -66,7 +54,6 @@ export async function GET(request: NextRequest) {
     cookieStore.set("id_token", data.id_token);
     cookieStore.set("access_token", data.access_token);
     cookieStore.set("refresh_token", data.refresh_token);
-    cookieStore.set("user_info", JSON.stringify(userInfo));
 
     return NextResponse.redirect(new URL("/", request.nextUrl));
   } catch (error) {
