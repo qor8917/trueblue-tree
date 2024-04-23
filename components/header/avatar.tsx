@@ -13,7 +13,11 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { getUserInfo } from "@/actions/auth/action";
+import {
+  getUserInfo,
+  redirectSignIn,
+  redirectSignOut,
+} from "@/actions/auth/action";
 import { useEffect, useState } from "react";
 
 export function AvatarIcon() {
@@ -49,8 +53,7 @@ export function AvatarIcon() {
             <DropdownMenuItem
               className="cursor-pointer"
               onClick={() => {
-                route.push("/api/auth/signout");
-                console.log("bb");
+                redirectSignOut();
                 setUserInfo(null);
               }}
             >
@@ -61,7 +64,7 @@ export function AvatarIcon() {
             <DropdownMenuItem
               className="cursor-pointer"
               onClick={async () => {
-                await fetch("/api/auth/google-sign-in");
+                redirectSignIn();
               }}
             >
               <LogOut className="mr-2 h-4 w-4" />
@@ -73,13 +76,3 @@ export function AvatarIcon() {
     </div>
   );
 }
-
-// export function AvatarIcon({ userInfo }: { userInfo: any }) {
-//   const route = useRouter();
-//   const picture = userInfo ? JSON.parse(userInfo.value).picture : null;
-//   console.log(picture);
-//   return (
-//
-
-//   );
-// }
