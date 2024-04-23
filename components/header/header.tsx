@@ -1,6 +1,5 @@
 import React from "react";
 import { AvatarIcon } from "./avatar";
-import { cookies } from "next/headers";
 import Menu from "./menu";
 
 const Header: React.FC = () => {
