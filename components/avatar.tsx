@@ -13,19 +13,12 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import {
-  getUserInfo,
-  redirectSignIn,
-  redirectSignOut,
-} from "@/actions/auth/action";
-import { useEffect, useState } from "react";
+import { redirectSignIn, redirectSignOut } from "@/actions/auth/action";
+import { UserInfo } from "@/types";
 
-export function AvatarIcon({ userInfo }: { userInfo: any }) {
+export function AvatarIcon({ userInfo }: { userInfo: UserInfo }) {
   const route = useRouter();
-  const [user, setUserInfo] = useState<any>(null);
-  useEffect(() => {
-    setUserInfo(userInfo);
-  }, [userInfo]);
+
   return (
     <div>
       <DropdownMenu>
@@ -34,21 +27,20 @@ export function AvatarIcon({ userInfo }: { userInfo: any }) {
             onClick={() => {
               route.push("/api/auth/google-sign-in");
             }}
+            className="shadow-lg self-center h-12 w-12"
           >
-            {user ? (
-              <>
-                <AvatarImage src={user.picture} alt="profile" />
-                <AvatarFallback>D</AvatarFallback>
-              </>
-            ) : (
-              <AvatarImage src={"/key.webp"} alt="profile" />
-            )}
+            <AvatarImage
+              src={
+                userInfo && userInfo.picture ? userInfo.picture : "/key.webp"
+              }
+              alt="profile"
+            />
           </Avatar>
         </DropdownMenuTrigger>
-        <DropdownMenuContent align="end">
+        <DropdownMenuContent align="end" sideOffset={16}>
           <DropdownMenuLabel>My Account</DropdownMenuLabel>
           <DropdownMenuSeparator />
-          {user ? (
+          {userInfo ? (
             <DropdownMenuItem
               className="cursor-pointer"
               onClick={async () => {
@@ -57,7 +49,7 @@ export function AvatarIcon({ userInfo }: { userInfo: any }) {
                   response: object;
                 };
                 if (status) {
-                  setUserInfo(null);
+                  route.push("/");
                   route.refresh();
                 }
               }}
