@@ -41,19 +41,13 @@ export default function DropZone() {
 
   return (
     <>
-      <div {...getRootProps()}>
+      <div {...getRootProps()} className=" border border-dashed px-8 py-16">
         <input {...getInputProps()} />
         {isDragActive ? (
           <p>Drop the files here ...</p>
         ) : (
           <p>Drag & drop some files here, or click to select files</p>
         )}
-      </div>
-      <div className="p-8">
-        <h4>Accepted files</h4>
-        <ul>{acceptedFileItems}</ul>
-        <h4>Rejected files</h4>
-        <ul>{fileRejectionItems}</ul>
       </div>
     </>
   );

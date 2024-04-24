@@ -6,6 +6,8 @@ import PhotoHeader from "../photo/photo-header";
 
 export default async function WrapperHeader(prop?: any) {
   const userInfo = await getUserInfo();
+  console.log(userInfo);
+  console.log(prop.category);
 
   const HeaderComponent = () => {
     switch (prop.category) {
@@ -18,7 +20,7 @@ export default async function WrapperHeader(prop?: any) {
 
   return (
     <header>
-      <div className="h-navHeight flex justify-between items-center py-4">
+      <div className="h-navHeight flex items-center py-4 justify-between gap-4">
         <HeaderComponent />
         <AvatarIcon userInfo={userInfo} />
       </div>
