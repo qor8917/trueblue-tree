@@ -16,14 +16,34 @@ export const getUserInfo = async () => {
   const tokenWithHeader = `Bearer ${accessToken.value}`;
 
   // Get UserInfo
-  const res = await fetch(`${NEXT_PUBLIC_COGNITO_DOMAIN}/oauth2/userInfo`, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/x-amz-json-1.1",
-      Authorization: tokenWithHeader,
-    },
-  });
-  const userInfo = await res.json();
+  const response = await fetch(
+    `${NEXT_PUBLIC_COGNITO_DOMAIN}/oauth2/userInfo`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/x-amz-json-1.1",
+        Authorization: tokenWithHeader,
+      },
+    }
+  );
+  if (!response.ok) {
+    const idTokenExists = cookieStore.has("id_token");
+    const accessTokenExists = cookieStore.has("access_token");
+    const refreshTokenExists = cookieStore.has("refresh_token");
+    if (idTokenExists) {
+      cookieStore.delete("id_token");
+    }
+
+    if (accessTokenExists) {
+      cookieStore.delete("access_token");
+    }
+
+    if (refreshTokenExists) {
+      cookieStore.delete("refresh_token");
+    }
+    return redirect("/");
+  }
+  const userInfo = await response.json();
 
   return userInfo;
 };
@@ -42,7 +62,6 @@ export const redirectSignIn = () => {
   authorizeParams.append("state", state);
   authorizeParams.append("identity_provider", "Google");
   authorizeParams.append("scope", "profile email openid");
-
   redirect(
     `${NEXT_PUBLIC_COGNITO_DOMAIN}/oauth2/authorize?${authorizeParams.toString()}`
   );
@@ -107,7 +126,7 @@ export const redirectSignOut = async () => {
     }
 
     return {
-      status: true,
+      status: 200,
       response: {},
     };
   }

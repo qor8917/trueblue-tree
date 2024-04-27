@@ -6,8 +6,6 @@ import PhotoHeader from "../photo/photo-header";
 
 export default async function WrapperHeader(prop?: any) {
   const userInfo = await getUserInfo();
-  console.log(userInfo);
-  console.log(prop.category);
 
   const HeaderComponent = () => {
     switch (prop.category) {

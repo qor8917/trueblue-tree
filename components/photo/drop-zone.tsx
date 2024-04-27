@@ -1,5 +1,8 @@
 "use client";
 import { FileError, FileWithPath } from "@/types/react-dropzone";
+import { UploadCloud } from "lucide-react";
+import { Button } from "@/components/ui/button";
+
 import React, { useCallback } from "react";
 import { useDropzone } from "react-dropzone";
 export default function DropZone() {
@@ -41,12 +44,21 @@ export default function DropZone() {
 
   return (
     <>
-      <div {...getRootProps()} className=" border border-dashed px-8 py-16">
-        <input {...getInputProps()} />
+      <div
+        {...getRootProps()}
+        className="border border-dashed px-8 py-16 border-teal-400 rounded-lg cursor-pointer"
+      >
+        <input {...getInputProps()} className="flex" />
         {isDragActive ? (
-          <p>Drop the files here ...</p>
+          <p>Drop the files here</p>
         ) : (
-          <p>Drag & drop some files here, or click to select files</p>
+          <div className="flex flex-col gap-4 text-center">
+            <UploadCloud className="self-center" />
+            <p>Drag & drop to upload</p>
+            <Button className="mainGradient text-white w-20 self-center">
+              Select
+            </Button>
+          </div>
         )}
       </div>
     </>

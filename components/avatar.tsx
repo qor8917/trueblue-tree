@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { redirectSignIn, redirectSignOut } from "@/actions/auth/action";
 import { UserInfo } from "@/types";
+import { cn } from "@/lib/utils";
 
 export function AvatarIcon({ userInfo }: { userInfo: UserInfo }) {
   const route = useRouter();
@@ -30,6 +31,7 @@ export function AvatarIcon({ userInfo }: { userInfo: UserInfo }) {
             className="shadow-lg self-center h-12 w-12"
           >
             <AvatarImage
+              className={cn(userInfo && userInfo.picture ? "" : "p-2")}
               src={
                 userInfo && userInfo.picture ? userInfo.picture : "/key.webp"
               }
@@ -45,10 +47,10 @@ export function AvatarIcon({ userInfo }: { userInfo: UserInfo }) {
               className="cursor-pointer"
               onClick={async () => {
                 const { status } = (await redirectSignOut()) as {
-                  status: boolean;
+                  status: number;
                   response: object;
                 };
-                if (status) {
+                if (status === 200) {
                   route.push("/");
                   route.refresh();
                 }
