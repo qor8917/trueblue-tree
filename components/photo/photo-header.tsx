@@ -9,7 +9,7 @@ export default function PhotoHeader({ userInfo }: { userInfo: UserInfo }) {
   return (
     <>
       {userInfo ? (
-        <div className="text-4xl cursor-pointer flex gap-4 grow justify-between h-12">
+        <div className="text-4xl cursor-pointer flex gap-4 grow justify-between">
           <div className="self-center">
             <Link href={"/photo"} className="flex">
               <span className="self-center pb-1">📸</span>
@@ -19,7 +19,9 @@ export default function PhotoHeader({ userInfo }: { userInfo: UserInfo }) {
             <DialogAddBtn />
           </div>
         </div>
-      ) : null}
+      ) : (
+        <div></div>
+      )}
     </>
   );
 }

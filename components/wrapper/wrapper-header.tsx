@@ -1,8 +1,8 @@
-import { AvatarIcon } from "../avatar";
 import { getUserInfo } from "@/actions/auth/action";
 import { Category } from "@/types";
 import Header from "./header";
 import PhotoHeader from "../photo/photo-header";
+import { AvatarIcon } from "../Avatar";
 
 export default async function WrapperHeader(prop?: any) {
   const userInfo = await getUserInfo();

@@ -12,7 +12,7 @@ export default function WrapperMain(prop?: any) {
     }
   };
   return (
-    <main className="h-full flex items-center justify-center">
+    <main className="h-full">
       <MainComnent />
     </main>
   );
