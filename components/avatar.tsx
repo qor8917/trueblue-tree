@@ -1,6 +1,6 @@
 "use client";
 
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { useRouter } from "next/navigation";
 
 import { LogOut } from "lucide-react";
@@ -13,47 +13,58 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { redirectSignIn, redirectSignOut } from "@/actions/auth/action";
-import { UserInfo } from "@/types";
+import {
+  getUserInfo,
+  redirectSignIn,
+  redirectSignOut,
+} from "@/actions/auth/actions";
 import { cn } from "@/lib/utils";
+import { useAuth } from "@/hooks/AuthProvider";
+import { useEffect } from "react";
 
-export function AvatarIcon({ userInfo }: { userInfo: UserInfo }) {
-  const route = useRouter();
+export function AvatarIcon() {
+  const authContext = useAuth();
+  useEffect(() => {
+    const userInfoFromSever = async () => {
+      const userInfo = await getUserInfo();
+      authContext?.setUserInfo(userInfo);
+    };
+    userInfoFromSever();
+  }, []);
 
   return (
     <div>
       <DropdownMenu>
         <DropdownMenuTrigger className="cursor-pointer outline-none">
-          <Avatar
-            onClick={() => {
-              route.push("/api/auth/google-sign-in");
-            }}
-            className="shadow-lg self-center h-12 w-12"
-          >
+          <Avatar className="shadow-lg self-center h-12 w-12">
             <AvatarImage
-              className={cn(userInfo && userInfo.picture ? "" : "p-2")}
+              className={cn(
+                authContext &&
+                  authContext?.userInfo &&
+                  authContext?.userInfo.picture
+                  ? ""
+                  : "p-2"
+              )}
               src={
-                userInfo && userInfo.picture ? userInfo.picture : "/key.webp"
+                authContext &&
+                authContext?.userInfo &&
+                authContext?.userInfo.picture
+                  ? authContext?.userInfo.picture
+                  : "/key.webp"
               }
               alt="profile"
             />
           </Avatar>
         </DropdownMenuTrigger>
-        <DropdownMenuContent align="end" sideOffset={16}>
+        <DropdownMenuContent align="end" sideOffset={16} className="bg-white">
           <DropdownMenuLabel>My Account</DropdownMenuLabel>
           <DropdownMenuSeparator />
-          {userInfo ? (
+          {authContext?.userInfo ? (
             <DropdownMenuItem
               className="cursor-pointer"
-              onClick={async () => {
-                const { status } = (await redirectSignOut()) as {
-                  status: number;
-                  response: object;
-                };
-                if (status === 200) {
-                  route.push("/");
-                  route.refresh();
-                }
+              onClick={() => {
+                redirectSignOut();
+                authContext.setUserInfo(null);
               }}
             >
               <LogOut className="mr-2 h-4 w-4 " />
@@ -62,7 +73,7 @@ export function AvatarIcon({ userInfo }: { userInfo: UserInfo }) {
           ) : (
             <DropdownMenuItem
               className="cursor-pointer"
-              onClick={async () => {
+              onClick={() => {
                 redirectSignIn();
               }}
             >

@@ -1,25 +1,27 @@
 "use client";
-import { CloudUpload } from "lucide-react";
 import Link from "next/link";
-import { useEffect, useState } from "react";
 import DialogAddBtn from "./photo-dialogAddBtn";
-import { UserInfo } from "@/types";
+import { useAuth } from "@/hooks/AuthProvider";
 
-export default function PhotoHeader({ userInfo }: { userInfo: UserInfo }) {
+export default function PhotoHeader() {
+  const authContext = useAuth();
+
+  if (!authContext?.userInfo) {
+    return;
+  }
+
   return (
     <>
-      {userInfo ? (
-        <div className="text-4xl cursor-pointer flex gap-4 grow justify-between h-12">
-          <div className="self-center">
-            <Link href={"/photo"} className="flex">
-              <span className="self-center pb-1">📸</span>
-            </Link>
-          </div>
-          <div className="flex">
-            <DialogAddBtn />
-          </div>
+      <div className="text-4xl cursor-pointer flex gap-4 grow justify-between">
+        <div className="self-center">
+          <Link href={"/photo"} className="flex">
+            <span className="self-center pb-1">📸</span>
+          </Link>
         </div>
-      ) : null}
+        <div className="flex">
+          <DialogAddBtn />
+        </div>
+      </div>
     </>
   );
 }
