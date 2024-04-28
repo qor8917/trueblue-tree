@@ -16,6 +16,7 @@ export default function PhotoMain() {
       { id: "1", name: "test4", src: "http://localhost:3000/images/1.avif" },
       { id: "2", name: "test4", src: "http://localhost:3000/images/2.avif" },
       { id: "3", name: "test4", src: "http://localhost:3000/images/3.avif" },
+      { id: "4", name: "test4", src: "http://localhost:3000/images/1.avif" },
     ]);
   }, []);
   return (

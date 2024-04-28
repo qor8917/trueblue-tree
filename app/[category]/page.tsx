@@ -1,5 +1,5 @@
 import WrapperHeader from "@/components/wrapper/wrapper-header";
-import WrapperMain from "@/components/wrapper/warpper-main";
+import WrapperMain from "@/components/wrapper/wrapper-main";
 
 export default function Page({ params }: { params: { category: string } }) {
   return (

@@ -44,7 +44,7 @@ export const getUserInfo = async () => {
     return redirect("/");
   }
   const userInfo = await response.json();
-
+  console.log(userInfo);
   return userInfo;
 };
 
@@ -125,9 +125,6 @@ export const redirectSignOut = async () => {
       cookieStore.delete("refresh_token");
     }
 
-    return {
-      status: 200,
-      response: {},
-    };
+    return redirect("/");
   }
 };

@@ -1,12 +1,13 @@
 "use client";
-import { UserInfo } from "@/types";
+import { useAuth } from "@/hooks/AuthProvider";
 import Link from "next/link";
-import { useEffect, useState } from "react";
 
-export default function Header({ userInfo }: { userInfo: UserInfo }) {
+export default function Header() {
+  const authContext = useAuth();
+
   return (
     <>
-      {userInfo ? (
+      {authContext?.userInfo ? (
         <div className="text-4xl cursor-pointer grow">
           <Link href={"/photo"}>📸</Link>
           <Link href={"/photo2"}>🌵</Link>

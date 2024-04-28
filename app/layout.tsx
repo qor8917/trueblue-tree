@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Roboto_Mono } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
+import { AuthProvider } from "@/hooks/AuthProvider";
 
 const mono = Roboto_Mono({
   subsets: ["latin"],
@@ -21,7 +22,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={cn("antialiased font-sans ", mono.variable)}>
-        {children}
+        <AuthProvider>{children}</AuthProvider>
       </body>
     </html>
   );

@@ -127,14 +127,14 @@ export default function SharedModal({
           )}
           {/* Bottom Nav bar */}
           {navigation && (
-            <div className="fixed inset-x-0 bottom-0 z-40 overflow-hidden bg-gradient-to-b from-black/0 to-black/60">
+            <div className="fixed inset-x-0 bottom-0 z-40 overflow-hidden bg-gradient-to-b from-black/0 to-black/70">
               <motion.div
                 initial={false}
                 className="mx-auto mt-6 mb-6 flex aspect-[3/2] h-14"
               >
                 <AnimatePresence initial={false}>
                   {console.log(filteredImages)}
-                  {filteredImages.map(({ public_id, format, id }) => (
+                  {filteredImages.map(({ id }: { id: any }) => (
                     <motion.button
                       initial={{
                         width: "0%",
