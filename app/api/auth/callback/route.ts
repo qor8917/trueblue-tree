@@ -12,7 +12,9 @@ export async function GET(request: NextRequest) {
     const origin = request.nextUrl.origin;
     const searchParams = request.nextUrl.searchParams;
     const code = searchParams.get("code") as string;
-
+    console.log("origin", origin);
+    console.log("searchParams", searchParams);
+    console.log("code", code);
     if (!code) {
       const error = searchParams.get("error");
       // return NextResponse.json({ error: error || "Unknown error" });
@@ -39,10 +41,10 @@ export async function GET(request: NextRequest) {
       },
       body: requestBody,
     });
-
     const data = await res.json();
-
+    console.log("aaaaaaaaaaaaa", data);
     if (!res.ok) {
+      console.log("bbbbbbbbbbbb", data.error);
       return NextResponse.json({
         error: data.error,
         error_description: data.error_description,
