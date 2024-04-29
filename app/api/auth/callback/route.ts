@@ -24,7 +24,7 @@ export async function GET(request: NextRequest) {
     if (!code) {
       const error = searchParams.get("error");
       // return NextResponse.json({ error: error || "Unknown error" });
-      return NextResponse.redirect(new URL("/", request.nextUrl));
+      return NextResponse.redirect(`${origin}`);
     }
 
     const authorizationHeader = `Basic ${Buffer.from(
@@ -63,8 +63,8 @@ export async function GET(request: NextRequest) {
     cookieStore.set("access_token", data.access_token);
     cookieStore.set("refresh_token", data.refresh_token);
 
-    return NextResponse.redirect(new URL("/", request.nextUrl));
+    return NextResponse.redirect(`${origin}`);
   } catch (error) {
-    return NextResponse.redirect(new URL("/", request.nextUrl));
+    return NextResponse.redirect(`${origin}`);
   }
 }
