@@ -9,8 +9,9 @@ const {
 } = process.env;
 
 export async function GET(request: NextRequest) {
+  const origin = NEXT_PUBLIC_HOST;
+
   try {
-    const origin = NEXT_PUBLIC_HOST;
     const searchParams = request.nextUrl.searchParams;
     const code = searchParams.get("code") as string;
     console.log("origin", origin);
