@@ -44,7 +44,6 @@ export const getUserInfo = async () => {
     return redirect("/");
   }
   const userInfo = await response.json();
-  console.log(userInfo);
   return userInfo;
 };
 
