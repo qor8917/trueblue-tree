@@ -5,16 +5,22 @@ const {
   NEXT_PUBLIC_COGNITO_DOMAIN,
   NEXT_PUBLIC_APP_CLIENT_ID,
   NEXT_PUBLIC_APP_CLIENT_SECRET,
+  NEXT_PUBLIC_HOST,
 } = process.env;
 
 export async function GET(request: NextRequest) {
   try {
-    const origin = request.nextUrl.origin;
+    const origin = NEXT_PUBLIC_HOST;
     const searchParams = request.nextUrl.searchParams;
     const code = searchParams.get("code") as string;
     console.log("origin", origin);
     console.log("searchParams", searchParams);
     console.log("code", code);
+    console.log("NEXT_PUBLIC_APP_CLIENT_ID", NEXT_PUBLIC_APP_CLIENT_ID);
+    console.log("NEXT_PUBLIC_APP_CLIENT_SECRET", NEXT_PUBLIC_APP_CLIENT_SECRET);
+    console.log("NEXT_PUBLIC_COGNITO_DOMAIN", NEXT_PUBLIC_COGNITO_DOMAIN);
+    console.log("request.nextUrl", request.nextUrl);
+    console.log("NEXT_PUBLIC_HOST", NEXT_PUBLIC_HOST);
     if (!code) {
       const error = searchParams.get("error");
       // return NextResponse.json({ error: error || "Unknown error" });
