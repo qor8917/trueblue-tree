@@ -1,7 +1,7 @@
 import { Category } from "@/types";
 import Header from "./header";
 import PhotoHeader from "../photo/photo-header";
-import { AvatarIcon } from "../Avatar";
+import { AvatarIcon } from "../AvatarIcon";
 
 export default async function WrapperHeader(prop?: any) {
   const HeaderComponent = () => {
