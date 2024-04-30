@@ -12,6 +12,7 @@
     "coverage": "jest --coverage"
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.565.0",
     "@aws-sdk/cloudfront-signer": "^3.541.0",
     "@radix-ui/react-avatar": "^1.0.4",
     "@radix-ui/react-dialog": "^1.0.5",
@@ -29,6 +30,7 @@
     "react-dropzone": "^14.2.3",
     "react-hotkeys-hook": "^4.5.0",
     "react-swipeable": "^7.0.1",
+    "sharp": "^0.33.3",
     "tailwind-merge": "^2.2.2",
     "tailwindcss-animate": "^1.0.7"
   },

@@ -63,7 +63,7 @@ export default function SharedModal({
                 className="absolute"
               >
                 <Image
-                  src={`http:localhost:3000/images/${index}.avif`}
+                  src={`/images/${index}.avif`}
                   width={navigation ? 1280 : 1920}
                   height={navigation ? 853 : 1280}
                   priority
@@ -133,7 +133,6 @@ export default function SharedModal({
                 className="mx-auto mt-6 mb-6 flex aspect-[3/2] h-14"
               >
                 <AnimatePresence initial={false}>
-                  {console.log(filteredImages)}
                   {filteredImages.map(({ id }: { id: any }) => (
                     <motion.button
                       initial={{
@@ -165,7 +164,7 @@ export default function SharedModal({
                             ? "brightness-110 hover:brightness-110"
                             : "brightness-50 contrast-125 hover:brightness-75"
                         } h-full transform object-cover transition`}
-                        src={`http:localhost:3000/images/${id}.avif`}
+                        src={`/images/${id}.avif`}
                       />
                     </motion.button>
                   ))}

@@ -12,7 +12,6 @@ import {
 } from "@radix-ui/react-dialog";
 
 export default function Modal({ images }: { images: any[] }) {
-  console.log(images);
   const router = useRouter();
   const searchParams = useSearchParams();
   const imageId = searchParams.get("imageId");

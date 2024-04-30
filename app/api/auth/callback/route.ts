@@ -14,14 +14,6 @@ export async function GET(request: NextRequest) {
   try {
     const searchParams = request.nextUrl.searchParams;
     const code = searchParams.get("code") as string;
-    console.log("origin", origin);
-    console.log("searchParams", searchParams);
-    console.log("code", code);
-    console.log("NEXT_PUBLIC_APP_CLIENT_ID", NEXT_PUBLIC_APP_CLIENT_ID);
-    console.log("NEXT_PUBLIC_APP_CLIENT_SECRET", NEXT_PUBLIC_APP_CLIENT_SECRET);
-    console.log("NEXT_PUBLIC_COGNITO_DOMAIN", NEXT_PUBLIC_COGNITO_DOMAIN);
-    console.log("request.nextUrl", request.nextUrl);
-    console.log("NEXT_PUBLIC_HOST", NEXT_PUBLIC_HOST);
     if (!code) {
       const error = searchParams.get("error");
       // return NextResponse.json({ error: error || "Unknown error" });
@@ -49,9 +41,7 @@ export async function GET(request: NextRequest) {
       body: requestBody,
     });
     const data = await res.json();
-    console.log("aaaaaaaaaaaaa", data);
     if (!res.ok) {
-      console.log("bbbbbbbbbbbb", data.error);
       return NextResponse.json({
         error: data.error,
         error_description: data.error_description,
