@@ -23,8 +23,9 @@ export default function DropZone() {
   } = useDropzone({
     onDrop,
     accept: {
-      "image/png": [".png", ".jpg", ".jpeg"],
+      "image/png": [".png"],
       "image/heic": [".heic"],
+      "image/jpeg": [".jpeg", ".jpg"],
     },
   });
 
